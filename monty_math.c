@@ -21,7 +21,7 @@ void add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * sub - subtracts the top element from the second to the top element of the stack
+ * sub - subtracts the top element from the next top element of the stack
  * @stack: top of the stack
  * @line_number: current line number
  */
@@ -41,7 +41,7 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - divides the top element from the second to the top element of the stack
+ * div - divides the top element from the next top element of the stack
  * @stack: top of the stack
  * @line_number: current line number
  */
@@ -79,7 +79,7 @@ void mul(stack_t **stack, unsigned int line_number)
 		printf("L%d: can't mul, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	top = pop(stack, line_number);
 	value = pop(stack, line_number) * top;
 	push(stack, line_number);
