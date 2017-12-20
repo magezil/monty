@@ -5,12 +5,12 @@ extern int value;
 /**
  * getop - compare token and opcode
  * @token: token received 
+ * @stack: pointer to the stack
  * @line: line count
  */
-void getop(char *token, unsigned int line)
+void getop(char *token, stack_t *stack, unsigned int line)
 {
 	int i = 0;
-	stack_t *stack = NULL;
 
 	instruction_t op[] = {
 		{"push", push},
@@ -19,7 +19,7 @@ void getop(char *token, unsigned int line)
 		{"pop", pop},
 		{"swap", swap},
 		{"add", add},
-		{"nop", nop}
+		{"nop", nop},
 		{NULL, NULL}
 	};
 
@@ -27,12 +27,36 @@ void getop(char *token, unsigned int line)
 	{
 		if (strcmp(token, op[i].opcode) == 0)
 		{
-			op[i].f(stack, line);
-			return;
+			op[i].f(&stack, line);
+			return;    /* Do I need to return? */
 		}
 	}
 	printf("L%d: unknown instruction %s\n", line, token);
 	exit(EXIT_FAILURE);
+}
+
+/**
+ * gettoken - parse string and get token
+ * @str: pointer to string
+ * @line: line count
+ */
+void gettoken(char *str, unsigned int line)
+{
+	char *token;
+	stack_t *stack = NULL;
+
+	token = malloc(sizeof(char *) * 1);
+	if (token == NULL)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	token = strtok(str, " "); 
+	if (strcmp(token, "push") == 0)
+		value = atoi(strtok(str, " "));  /* Add check to ensure it's int?*/
+	getop(token, stack, line);
+	free(token);
+	return;    /* Do I need to return? */
 }
 
 /**
@@ -42,9 +66,9 @@ void getop(char *token, unsigned int line)
 void readfile(const char *file)
 {
 	FILE *fp;
-	char *buffer = NULL, *op;
+	char *buffer = NULL, *str;
 	size_t size = 0;
-	unsigned int line = 0;
+	unsigned int line = 1;
 
 	fp = fopen(file, "r");
 	if (fp == NULL)
@@ -53,18 +77,20 @@ void readfile(const char *file)
 		exit(EXIT_FAILURE);
 	}
 
-	op = malloc(sizeof(char *) * 2);
-	if (op == NULL)
-	(
+	str = malloc(sizeof(char *) * 1);
+	if (str == NULL)
+	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	while (getline(&buffer, &size, fp) != -1)
+	getline(&buffer, &size, fp);
+	while (buffer)
 	{
-		op = strtok(buffer, " ");
-		getop(op, line);
+		str = strtok(buffer, "\n");
+		gettoken(str, line);
 		line++;
 	}
 	fclose(fp);
 	free(buffer);
+	free(str);
 }

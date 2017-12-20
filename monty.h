@@ -37,6 +37,7 @@ typedef struct instruction_s
 
 
 void readfile(const char *file);
-void getop(char *token, unsigned int line);
+void getop(char *token, stack_t *stack, unsigned int line);
+void gettoken(char *str, unsigned int line);
 
 #endif
