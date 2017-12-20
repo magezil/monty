@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int value;
+extern int value;
 
 /**
  * push - adds a value to the beginning of a list
