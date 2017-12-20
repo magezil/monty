@@ -1,7 +1,5 @@
 #include "monty.h"
 
-extern int value;
-
 /**
  * push - adds a value to the beginning of a list
  * @stack: top of the stack
@@ -71,6 +69,7 @@ void pint(stack_t **stack, unsigned int line_number)
 		printf("L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	/* printf("%d\n", value); */
 	printf("%d\n", (*stack)->n);
 }
 
@@ -126,4 +125,5 @@ void swap(stack_t **stack, unsigned int line_number)
 	temp->next = (*stack)->next;
 	(*stack)->prev = NULL;
 	(*stack)->next = temp;
+	value = (*stack)->n;
 }

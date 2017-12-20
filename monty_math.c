@@ -1,7 +1,5 @@
 #include "monty.h"
 
-extern int value;
-
 /**
  * add - adds the top two elements of the stack
  * @stack: top of the stack
@@ -9,7 +7,7 @@ extern int value;
  */
 void add(stack_t **stack, unsigned int line_number)
 {
-	int sum;
+	int top;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
@@ -17,9 +15,8 @@ void add(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	sum = pop(stack, line_number);
-	sum += pop(stack, line_number);
-	value = sum;
+	top = pop(stack, line_number);
+	value = top + pop(stack, line_number);
 	push(stack, line_number);
 }
 
@@ -30,7 +27,7 @@ void add(stack_t **stack, unsigned int line_number)
  */
 void sub(stack_t **stack, unsigned int line_number)
 {
-	int dif;
+	int top;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
@@ -38,8 +35,7 @@ void sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	dif = pop(stack, line_number);
-	dif -= pop(stack, line_number);
-	value = dif;
+	top = pop(stack, line_number);
+	value = pop(stack, line_number) - top;
 	push(stack, line_number);
 }
