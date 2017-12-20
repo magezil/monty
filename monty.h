@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -35,6 +36,7 @@ typedef struct instruction_s
 } instruction_t;
 
 
-int readfile(const char *file);
+void readfile(const char *file);
+void getop(char *token, unsigned int line);
 
 #endif
