@@ -35,6 +35,6 @@ typedef struct instruction_s
 } instruction_t;
 
 
-int readfile(const char *file, size_t size);
+int readfile(const char *file);
 
 #endif

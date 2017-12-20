@@ -5,14 +5,13 @@ extern int value;
 /**
  * readfile - Read a text file
  * @file: File to be read
- * @size: size_t holder, initilized 0 when coming in
- * Return: TBD, 0 for now
+ * Return: 0
  */
-int readfile(const char *file, size_t size)
+int readfile(const char *file)
 {
 	FILE *fp;
-	ssize_t read;
 	char *buffer = NULL;
+	size_t size = 0;
 
 	fp = fopen(file, "r");
 	if (fp == NULL)
@@ -20,7 +19,10 @@ int readfile(const char *file, size_t size)
 		printf("Error: Can't open file %s\n", file);
 		return(EXIT_FAILURE);
 	}
-	read = getline(&buffer, &size, fp)
+	while(getline(&buffer, &size, fp) != -1)
+	{
+		
+	}
 	fclose(fp);
 	free(buffer);
 	return (0);
@@ -34,14 +36,12 @@ int readfile(const char *file, size_t size)
  */
 int main(int ac, char **av)
 {
-	size_t size = 0;
-
 	if (ac != 2)
 	{
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	readfile(av[1], size);
+	readfile(av[1]);
 
 	return (0);
 }
