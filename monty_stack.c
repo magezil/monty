@@ -6,10 +6,8 @@ int value;
  * push - adds a value to the beginning of a list
  * @stack: top of the stack
  * @line_number: current line number
- *
- * Return: new node
  */
-stack_t *push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
 
@@ -36,7 +34,6 @@ stack_t *push(stack_t **stack, unsigned int line_number)
 	new->prev = NULL;
 	new->next = *stack;
 	*stack = new;
-	return (new);
 }
 
 /**
@@ -81,19 +78,22 @@ void pint(stack_t **stack, unsigned int line_number)
  * pop - removes the top element of a stack
  * @stack: top of the stack
  * @line_number: current line number
- *
- * Return: deleted node
+ * Return: value of popped node
  */
-void pop(stack_t **stack, unsigned int line_number)
+int pop(stack_t **stack, unsigned int line_number)
 {
+	int n;
+
 	if (stack == NULL || *stack == NULL)
 	{
 		printf("L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	n = (*stack)->n;
 	if ((*stack)->next != NULL)
 	{
 		*stack = (*stack)->next;
+		value = (*stack)->n;
 		free((*stack)->prev);
 	}
 	else
@@ -101,6 +101,7 @@ void pop(stack_t **stack, unsigned int line_number)
 		free(*stack);
 		*stack = NULL;
 	}
+	return (n);
 }
 
 /**
