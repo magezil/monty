@@ -122,17 +122,18 @@ void readfile(const char *file)
 	}
 	while (getline(&buffer, &size, fp) != -1)
 	{
-		if (*buffer == '\n')
-			continue;
+		if (*buffer != '\n')
+		{
 /* printf("buffer: %s\n", buffer);*/
-		str = strtok(buffer, "\n");
+			str = strtok(buffer, "\n");
 /* printf("buffer: %s$\n", str);*/
 /*
  * printf("token: %s\n", str);
  * printf("L%u: readfile\n", line);
  * printf("token: %s\n", str);
  */
-		gettoken(str, &stack, line);
+			gettoken(str, &stack, line);
+		}
 		line++;
 	}
 	fclose(fp);
