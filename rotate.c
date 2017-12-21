@@ -30,7 +30,16 @@ void rotl(stack_t **stack, __attribute__((unused))unsigned int line_number)
  */
 void rotr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
+	stack_t *temp;
 
-	if (stack == NULL)
+	if (stack == NULL || *stack == NULL)
 		return;
+	temp = *stack;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = *stack;
+	temp->prev->next = NULL;
+	temp->prev = NULL;
+	(*stack)->prev = temp;
+	*stack = temp;
 }
