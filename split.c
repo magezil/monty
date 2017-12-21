@@ -130,9 +130,7 @@ printf("L%u: readfile\n", line);
 printf("token: %s\n", str);*/
 		gettoken(str, &stack, line);
 		line++;
-		str = strtok(NULL, "\n");
 	}
 	fclose(fp);
 	free(buffer);
-	free(str);
 }
