@@ -127,6 +127,6 @@ void readfile(const char *file)
 	}
 	fclose(fp);
 	free(buffer);
-	if (stack != NULL)
-		free(stack);
+	while (stack != NULL)
+		pop(&stack, line);
 }
