@@ -2,8 +2,8 @@
 
 /**
  * freestack - frees the stack
- * @stack - stack to free
- * @line_number - current line number
+ * @stack: stack to free
+ * @line_number: current line number
  */
 void freestack(stack_t **stack, unsigned int line_number)
 {
@@ -44,7 +44,8 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 
 	if (stack == NULL || *stack == NULL || !isascii(value) || value == 0)
 		return;
-	for(temp = *stack; temp != NULL && temp->n != 0 && isascii(temp->n); temp = temp->next)
+	temp = *stack;
+	for (; temp != NULL && temp->n != 0 && isascii(temp->n); temp = temp->next)
 		printf("%c", value);
 	printf("\n");
 }
