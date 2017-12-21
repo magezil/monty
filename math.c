@@ -75,6 +75,7 @@ void divide(stack_t **stack, unsigned int line_number)
 	top = value / top;
 	pop(stack, line_number);
 	value = top;
+	push(stack, line_number);
 }
 
 /**
@@ -98,6 +99,7 @@ void mul(stack_t **stack, unsigned int line_number)
 	top *= value;
 	pop(stack, line_number);
 	value = top;
+	push(stack, line_number);
 }
 
 /**
@@ -128,4 +130,5 @@ void mod(stack_t **stack, unsigned int line_number)
 	top = value % top;
 	pop(stack, line_number);
 	value = top;
+	push(stack, line_number);
 }
