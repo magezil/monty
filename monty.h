@@ -54,7 +54,7 @@ void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 
 void readfile(const char *file);
-void getop(char *token, stack_t *stack, unsigned int line);
-void gettoken(char *str, unsigned int line);
+void getop(char *token, stack_t **stack, unsigned int line);
+void gettoken(char *str, stack_t **stack, unsigned int line);
 
 #endif
