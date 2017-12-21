@@ -14,14 +14,6 @@ void push(stack_t **stack, unsigned int line_number)
 		printf("L%d: invalid stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-/*
- * this should be checked in main?
- *	if (!isdigit(value))
- *	{
- *		printf("L%d: usage: push integer\n", line_number);
- *		exit(EXIT_FAILURE);
- *	}
- */
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
