@@ -12,6 +12,8 @@ int isnum(char *str)
 {
 	if (str == NULL)
 		return (0);
+	if (*str == '-')
+		str++;
 	while (*str != '\0')
 	{
 		if (!isdigit(*str))
