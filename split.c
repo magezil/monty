@@ -69,6 +69,9 @@ void gettoken(char *str, stack_t **stack, unsigned int line)
 /*printf("gettoken: %s\n", str);*/
 	token = strtok(str, " ");
 /*printf("gettoken, token: %s\n", token);*/
+		/* skip empty lines or lines startin with # */
+	if (token == NULL || *token == '\n' || *token == ' ' || *token == '#')
+		return;
 	if (strcmp(token, "push") == 0)
 	{
 		/* TODO: Add check to ensure it's int?*/
@@ -109,8 +112,11 @@ void readfile(const char *file)
 	}
 	while (getline(&buffer, &size, fp) != -1)
 	{
-/*printf("buffer: %s\n", buffer);*/
+		if (*buffer == '\n')
+			continue;
+/* printf("buffer: %s\n", buffer);*/
 		str = strtok(buffer, "\n");
+/* printf("buffer: %s$\n", str);*/
 /*
  * printf("token: %s\n", str);
  * printf("L%u: readfile\n", line);
