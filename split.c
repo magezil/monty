@@ -1,6 +1,6 @@
 #include "monty.h"
 
-extern int value;
+int value;
 
 /**
  * getop - compare token and opcode
@@ -23,12 +23,13 @@ void getop(char *token, stack_t *stack, unsigned int line)
 		{NULL, NULL}
 	};
 
+printf("getop: %s\n", token);
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
 		if (strcmp(token, op[i].opcode) == 0)
 		{
 			op[i].f(&stack, line);
-			return;    /* Do I need to return? */
+			return;
 		}
 	}
 	printf("L%d: unknown instruction %s\n", line, token);
@@ -45,18 +46,23 @@ void gettoken(char *str, unsigned int line)
 	char *token;
 	stack_t *stack = NULL;
 
-	token = malloc(sizeof(char *) * 1);
+printf("gettoken: %s\n", str);
+/*	token = malloc(sizeof(char *) * 1);
 	if (token == NULL)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+	*/
 	token = strtok(str, " "); 
+printf("gettoken, token: %s\n", token);
 	if (strcmp(token, "push") == 0)
-		value = atoi(strtok(str, " "));  /* Add check to ensure it's int?*/
+	{
+		value = atoi(strtok(NULL, " "));  /* Add check to ensure it's int?*/
+		printf("push %d\n", value);
+	}
 	getop(token, stack, line);
-	free(token);
-	return;    /* Do I need to return? */
+/*	free(token);*/
 }
 
 /**
@@ -76,19 +82,23 @@ void readfile(const char *file)
 		printf("Error: Can't open file %s\n", file);
 		exit(EXIT_FAILURE);
 	}
-
+/*
 	str = malloc(sizeof(char *) * 1);
 	if (str == NULL)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
-	}
-	getline(&buffer, &size, fp);
-	while (buffer)
+	}*/
+	while (getline(&buffer, &size, fp) != -1)
 	{
-		str = strtok(buffer, "\n");
+printf("buffer: %s\n", buffer);
+	str = strtok(buffer, "\n");
+printf("token: %s\n", str);
+printf("L%u: readfile\n", line);
+printf("token: %s\n", str);
 		gettoken(str, line);
 		line++;
+		str = strtok(NULL, "\n");
 	}
 	fclose(fp);
 	free(buffer);
