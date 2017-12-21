@@ -45,6 +45,7 @@ void getop(char *token, stack_t **stack, unsigned int line)
 void gettoken(char *str, stack_t **stack, unsigned int line)
 {
 	char *token;
+	char *vtoken;
 
 /*printf("gettoken: %s\n", str);*/
 /*	token = malloc(sizeof(char *) * 1);
@@ -59,11 +60,21 @@ void gettoken(char *str, stack_t **stack, unsigned int line)
 	if (strcmp(token, "push") == 0)
 	{
 		/* TODO: Add check to ensure it's int?*/
-		value = atoi(strtok(NULL, " "));  
+		vtoken = token; 
+		token = strtok(NULL, " ");
+/*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
+		if (!isdigit(*token))
+		{
+			printf("L%d: usage: push integer\n", line);
+			exit(EXIT_FAILURE);
+		}
+/*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
+		value = atoi(token);
+		getop(vtoken, stack, line);
 /*printf("push %d\n", value);*/
 	}
-	getop(token, stack, line);
-/*	free(token);*/
+	else
+		getop(token, stack, line);
 }
 
 /**
