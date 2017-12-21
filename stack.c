@@ -103,30 +103,34 @@ void pop(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	int val1, val2;
+	stack_t *temp;
+/*	int val1, val2;*/
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		printf("L%d: swap, stack too short\n", line_number);
+		printf("L%d: can't swap, stack too short\n", line_number);
 		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
-	val1 = value;
-	pop(stack, line_number);
-	val2 = value;
-	pop(stack, line_number);
-	value = val1;
-	push(stack, line_number);
-	value = val2;
-	push(stack, line_number);
-
 /*
- *	temp = *stack;
- *	*stack = (*stack)->next;
- *	temp->prev = *stack;
- *	temp->next = (*stack)->next;
- *	(*stack)->prev = NULL;
- *	(*stack)->next = temp;
- *	value = (*stack)->n;
- */
+ *	val1 = value;
+ *	pop(stack, line_number);
+ *	val2 = value;
+ *	pop(stack, line_number);
+ *	value = val1;
+ *	push(stack, line_number);
+ *	value = val2;
+ *	push(stack, line_number);
+*/
+
+	temp = *stack;
+	*stack = (*stack)->next;
+	temp->prev = *stack;
+	temp->next = (*stack)->next;
+	(*stack)->prev = NULL;
+	(*stack)->next = temp;
+	if (temp->next != NULL)
+		temp->next->prev = temp;
+	value = (*stack)->n;
+
 }
