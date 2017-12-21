@@ -11,7 +11,7 @@ int value;
 int isnum(char *str)
 {
 	if (str == NULL)
-		return 0;
+		return (0);
 	while (*str != '\0')
 	{
 		if (!isdigit(*str))
@@ -23,7 +23,7 @@ int isnum(char *str)
 
 /**
  * getop - compare token and opcode
- * @token: token received 
+ * @token: token received
  * @stack: pointer to the stack
  * @line: line count
  */
@@ -67,19 +67,12 @@ void gettoken(char *str, stack_t **stack, unsigned int line)
 	char *vtoken;
 
 /*printf("gettoken: %s\n", str);*/
-/*	token = malloc(sizeof(char *) * 1);
-	if (token == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	*/
-	token = strtok(str, " "); 
+	token = strtok(str, " ");
 /*printf("gettoken, token: %s\n", token);*/
 	if (strcmp(token, "push") == 0)
 	{
 		/* TODO: Add check to ensure it's int?*/
-		vtoken = token; 
+		vtoken = token;
 		token = strtok(NULL, " ");
 /*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
 		if (!isnum(token))
@@ -114,20 +107,15 @@ void readfile(const char *file)
 		printf("Error: Can't open file %s\n", file);
 		exit(EXIT_FAILURE);
 	}
-/*
-	str = malloc(sizeof(char *) * 1);
-	if (str == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}*/
 	while (getline(&buffer, &size, fp) != -1)
 	{
 /*printf("buffer: %s\n", buffer);*/
 		str = strtok(buffer, "\n");
-/*printf("token: %s\n", str);
-printf("L%u: readfile\n", line);
-printf("token: %s\n", str);*/
+/*
+ * printf("token: %s\n", str);
+ * printf("L%u: readfile\n", line);
+ * printf("token: %s\n", str);
+ */
 		gettoken(str, &stack, line);
 		line++;
 	}

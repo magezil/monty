@@ -3,7 +3,7 @@
 /**
  * main - entry point of the program
  * @ac: numbers of aurgments
- * @av: arguments received 
+ * @av: arguments received
  * Return: 0
  */
 int main(int ac, char **av)
