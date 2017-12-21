@@ -1,5 +1,5 @@
 #include "monty.h"
-
+/* TODO: free all before exit */
 /**
  * add - adds the top two elements of the stack
  * @stack: top of the stack

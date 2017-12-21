@@ -1,5 +1,5 @@
 #include "monty.h"
-
+/* TODO: be sure to free before exit */
 int value;
 
 /**
@@ -39,10 +39,10 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
-                {"sub", sub},
-                {"div", divide},
-                {"mul", mul},
-                {"mod", mod},
+		{"sub", sub},
+		{"div", divide},
+		{"mul", mul},
+		{"mod", mod},
 		{NULL, NULL}
 	};
 
