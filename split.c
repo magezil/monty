@@ -133,4 +133,6 @@ printf("token: %s\n", str);*/
 	}
 	fclose(fp);
 	free(buffer);
+	if (stack != NULL)
+		free(stack);
 }
