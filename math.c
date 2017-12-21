@@ -15,8 +15,11 @@ void add(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	top = pop(stack, line_number);
-	value = pop(stack, line_number) + top;
+	top = value;
+	pop(stack, line_number);
+	top += value;
+	pop(stack, line_number);
+	value = top;
 	push(stack, line_number);
 }
 
@@ -35,17 +38,20 @@ void sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	top = pop(stack, line_number);
-	value = pop(stack, line_number) - top;
+	top = value;
+	pop(stack, line_number);
+	top = value - top;
+	pop(stack, line_number);
+	value = top;
 	push(stack, line_number);
 }
 
 /**
- * div - divides the top element from the next top element of the stack
+ * divide - divides the top element from the next top element of the stack
  * @stack: top of the stack
  * @line_number: current line number
  */
-void div(stack_t **stack, unsigned int line_number)
+void divide(stack_t **stack, unsigned int line_number)
 {
 	int top;
 
@@ -60,9 +66,11 @@ void div(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	top = pop(stack, line_number);
-	value = pop(stack, line_number) / top;
-	push(stack, line_number);
+	top = value;
+	pop(stack, line_number);
+	top = value / top;
+	pop(stack, line_number);
+	value = top;
 }
 
 /**
@@ -80,9 +88,11 @@ void mul(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	top = pop(stack, line_number);
-	value = pop(stack, line_number) * top;
-	push(stack, line_number);
+	top = value;
+	pop(stack, line_number);
+	top *= value;
+	pop(stack, line_number);
+	value = top;
 }
 
 /**
@@ -106,7 +116,9 @@ void mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	top = pop(stack, line_number);
-	value = pop(stack, line_number) % top;
-	push(stack, line_number);
+	top = value;
+	pop(stack, line_number);
+	top = value % top;
+	pop(stack, line_number);
+	value = top;
 }

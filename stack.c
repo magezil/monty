@@ -79,16 +79,13 @@ void pint(stack_t **stack, unsigned int line_number)
  * @line_number: current line number
  * Return: value of popped node
  */
-int pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
-	int n;
-
 	if (stack == NULL || *stack == NULL)
 	{
 		printf("L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	n = (*stack)->n;
 	if ((*stack)->next != NULL)
 	{
 		*stack = (*stack)->next;
@@ -100,7 +97,6 @@ int pop(stack_t **stack, unsigned int line_number)
 		free(*stack);
 		*stack = NULL;
 	}
-	return (n);
 }
 
 /**
