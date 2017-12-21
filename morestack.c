@@ -43,7 +43,10 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	stack_t *temp;
 
 	if (stack == NULL || *stack == NULL || !isascii(value) || value == 0)
+	{
+		printf("\n");
 		return;
+	}
 	temp = *stack;
 	for (; temp != NULL && temp->n != 0 && isascii(temp->n); temp = temp->next)
 		printf("%c", temp->n);
