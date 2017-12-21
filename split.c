@@ -1,5 +1,5 @@
 #include "monty.h"
-/* TODO: be sure to free before exit */
+
 int value;
 
 /**
@@ -137,5 +137,6 @@ void readfile(const char *file)
 	}
 	fclose(fp);
 	free(buffer);
-	freestack(&stack, line);
+	if (stack != NULL)
+		freestack(&stack, line);
 }
