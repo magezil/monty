@@ -48,7 +48,6 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("L%d: invalid stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
 	temp = *stack;
 	while (temp != NULL)
 	{
