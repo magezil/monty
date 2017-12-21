@@ -3,6 +3,25 @@
 int value;
 
 /**
+ * isnum - checks if string is a number
+ * @str: string to check
+ *
+ * Return: 1 if a number, 0 otherwise
+ */
+int isnum(char *str)
+{
+	if (str == NULL)
+		return 0;
+	while (*str != '\0')
+	{
+		if (!isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+/**
  * getop - compare token and opcode
  * @token: token received 
  * @stack: pointer to the stack
@@ -63,7 +82,7 @@ void gettoken(char *str, stack_t **stack, unsigned int line)
 		vtoken = token; 
 		token = strtok(NULL, " ");
 /*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
-		if (!isdigit(*token))
+		if (!isnum(token))
 		{
 			printf("L%d: usage: push integer\n", line);
 			exit(EXIT_FAILURE);
