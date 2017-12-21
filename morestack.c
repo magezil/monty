@@ -46,6 +46,6 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 		return;
 	temp = *stack;
 	for (; temp != NULL && temp->n != 0 && isascii(temp->n); temp = temp->next)
-		printf("%c", value);
+		printf("%c", temp->n);
 	printf("\n");
 }
