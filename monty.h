@@ -58,4 +58,8 @@ void getop(char *token, stack_t **stack, unsigned int line);
 void gettoken(char *str, stack_t **stack, unsigned int line);
 int isnum(char *str);
 
+void freestack(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+
 #endif

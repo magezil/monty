@@ -12,6 +12,8 @@ int isnum(char *str)
 {
 	if (str == NULL)
 		return (0);
+	if (*str == '-')
+		str++;
 	while (*str != '\0')
 	{
 		if (!isdigit(*str))
@@ -39,10 +41,12 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
-                {"sub", sub},
-                {"div", divide},
-                {"mul", mul},
-                {"mod", mod},
+		{"sub", sub},
+		{"div", divide},
+		{"mul", mul},
+		{"mod", mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
 		{NULL, NULL}
 	};
 
@@ -56,6 +60,7 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		}
 	}
 	printf("L%d: unknown instruction %s\n", line, token);
+	freestack(stack, line);
 	exit(EXIT_FAILURE);
 }
 
@@ -85,6 +90,7 @@ void gettoken(char *str, stack_t **stack, unsigned int line)
 		if (!isnum(token))
 		{
 			printf("L%d: usage: push integer\n", line);
+			freestack(stack, line);
 			exit(EXIT_FAILURE);
 		}
 /*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
@@ -116,21 +122,22 @@ void readfile(const char *file)
 	}
 	while (getline(&buffer, &size, fp) != -1)
 	{
-		if (*buffer == '\n')
-			continue;
+		if (*buffer != '\n')
+		{
 /* printf("buffer: %s\n", buffer);*/
-		str = strtok(buffer, "\n");
+			str = strtok(buffer, "\n");
 /* printf("buffer: %s$\n", str);*/
 /*
  * printf("token: %s\n", str);
  * printf("L%u: readfile\n", line);
  * printf("token: %s\n", str);
  */
-		gettoken(str, &stack, line);
+			gettoken(str, &stack, line);
+		}
 		line++;
 	}
 	fclose(fp);
 	free(buffer);
-	while (stack != NULL)
-		pop(&stack, line);
+	if (stack != NULL)
+		freestack(&stack, line);
 }
