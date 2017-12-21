@@ -47,6 +47,8 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		{"mod", mod},
 		{"pchar", pchar},
 		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 
