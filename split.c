@@ -39,6 +39,10 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+                {"sub", sub},
+                {"div", divide},
+                {"mul", mul},
+                {"mod", mod},
 		{NULL, NULL}
 	};
 
