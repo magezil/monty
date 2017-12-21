@@ -18,8 +18,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (new == NULL)
 	{
 		printf("Error: malloc failed\n");
-		while (*stack != NULL)
-			pop(stack, line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	new->n = value;
@@ -108,8 +107,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: swap, stack too short\n", line_number);
-		while (*stack != NULL)
-			pop(stack, line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	temp = *stack;

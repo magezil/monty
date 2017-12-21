@@ -1,5 +1,5 @@
 #include "monty.h"
-/* TODO: free all before exit */
+
 /**
  * add - adds the top two elements of the stack
  * @stack: top of the stack
@@ -12,6 +12,7 @@ void add(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't add, stack too short\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -35,6 +36,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't sub, stack too short\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -58,11 +60,13 @@ void divide(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't div, stack too short\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	if (value == 0)
 	{
 		printf("L%d: division by zero\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -85,6 +89,7 @@ void mul(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't mul, stack too short\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -108,11 +113,13 @@ void mod(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't mod, stack too short\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	if (value == 0)
 	{
 		printf("L%d: division by zero\n", line_number);
+		freestack(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 
