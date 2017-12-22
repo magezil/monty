@@ -65,4 +65,12 @@ void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 
+void qpush(stack_t **stack, unsigned int line_number);
+
+void qadd(stack_t **stack, unsigned int line_number);
+void qsub(stack_t **stack, unsigned int line_number);
+void qdivide(stack_t **stack, unsigned int line_number);
+void qmul(stack_t **stack, unsigned int line_number);
+void qmod(stack_t **stack, unsigned int line_number);
+
 #endif

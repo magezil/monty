@@ -32,6 +32,7 @@ int isnum(char *str)
 void getop(char *token, stack_t **stack, unsigned int line)
 {
 	int i = 0;
+	static char data = 0; /* 0 for stack, 1 for queue */
 
 	instruction_t op[] = {
 		{"push", push},
@@ -52,6 +53,21 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		{NULL, NULL}
 	};
 
+	if (strcmp(token, "queue") == 0)
+	{
+		data = 1;
+		return;
+	}
+	if (strcmp(token, "stack") == 0)
+	{
+		data = 0;
+		return;
+	}
+	if (data == 1 && strcmp(token, "push") == 0)
+	{
+		qpush(stack, line);
+		return;
+	}
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
 		if (strcmp(token, op[i].opcode) == 0)
