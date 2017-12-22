@@ -32,6 +32,7 @@ int isnum(char *str)
 void getop(char *token, stack_t **stack, unsigned int line)
 {
 	int i = 0;
+	static char data = 0; /* 0 for stack, 1 for queue */
 
 	instruction_t op[] = {
 		{"push", push},
@@ -52,7 +53,21 @@ void getop(char *token, stack_t **stack, unsigned int line)
 		{NULL, NULL}
 	};
 
-/*printf("getop: %s\n", token);*/
+	if (strcmp(token, "queue") == 0)
+	{
+		data = 1;
+		return;
+	}
+	if (strcmp(token, "stack") == 0)
+	{
+		data = 0;
+		return;
+	}
+	if (data == 1 && strcmp(token, "push") == 0)
+	{
+		qpush(stack, line);
+		return;
+	}
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
 		if (strcmp(token, op[i].opcode) == 0)
@@ -77,28 +92,23 @@ void gettoken(char *str, stack_t **stack, unsigned int line)
 	char *token;
 	char *vtoken;
 
-/*printf("gettoken: %s\n", str);*/
 	token = strtok(str, " ");
-/*printf("gettoken, token: %s\n", token);*/
-		/* skip empty lines or lines startin with # */
+	/* skip empty lines or lines startin with # */
 	if (token == NULL || *token == '\n' || *token == ' ' || *token == '#')
 		return;
 	if (strcmp(token, "push") == 0)
 	{
-		/* TODO: Add check to ensure it's int?*/
+		/* check to ensure it's int */
 		vtoken = token;
 		token = strtok(NULL, " ");
-/*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
 		if (!isnum(token))
 		{
 			printf("L%d: usage: push integer\n", line);
 			freestack(stack, line);
 			exit(EXIT_FAILURE);
 		}
-/*printf("gettoken, vtoken: %s, token: %s\n", vtoken, token);*/
 		value = atoi(token);
 		getop(vtoken, stack, line);
-/*printf("push %d\n", value);*/
 	}
 	else
 		getop(token, stack, line);
@@ -126,14 +136,7 @@ void readfile(const char *file)
 	{
 		if (*buffer != '\n')
 		{
-/* printf("buffer: %s\n", buffer);*/
 			str = strtok(buffer, "\n");
-/* printf("buffer: %s$\n", str);*/
-/*
- * printf("token: %s\n", str);
- * printf("L%u: readfile\n", line);
- * printf("token: %s\n", str);
- */
 			gettoken(str, &stack, line);
 		}
 		line++;
