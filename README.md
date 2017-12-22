@@ -31,7 +31,7 @@ $ monty bytecodes/000.m
 0
 $
 ```
-**Monty opcode**
+## Monty opcode  
 |Opcode|Description|
 |------|-----------|
 |push|Push an element on to the stack|
@@ -50,7 +50,7 @@ $
 |rotl|Rotate the top element of the stack to the bottom of the stack|
 |rotr|Rotate the bottom element of the stack to the top of the stack|
 |queue|Switch mode to queue: the top of the stack becomes the front of the queue|
-|stack|Switch mode to stack: the top of the queue becomes the top of the stack||
+|stack|Switch mode to stack: the top of the queue becomes the top of the stack|
 ## List of files
 |File name| Description|
 |---------|------------|
