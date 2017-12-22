@@ -31,7 +31,6 @@ $ monty bytecodes/000.m
 0
 $
 ```
-**Monty opcode**  
 |Opcode|Description|
 |------|-----------|
 |push|Push an element on to the stack|
